@@ -1,0 +1,29 @@
+<div class="content row container-fluid">
+	<div class="well col-xs-10 col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+		<div class="alert alert-danger" ng-show="alert">
+	  	<p><string>Error: </strong>{{error}}</p>
+		</div>
+		<form class="form-group form-horizontal col-md-offset-2 col-sm-offset-2 col-xs-offset-2" name"profile_form" ng_submit="submit()">
+			<div class="row padding-top padding-bottom">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+					<!--Profile Name-->
+					<label>Email</label>
+			  	<input type="text" name="eamil" class="form-control" ng-model="userFormData.email" required>
+			  	<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Please enter an email.</p>
+				</div>
+					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+						<!--Profile Password-->
+						<label>Password</label>
+				  	<input type="password" name="lastName" class="form-control" ng-model="userFormData.password" required>
+				  	<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Password is required.</p>
+						</select>
+					<!--Submit Button-->
+					</div>
+			</div>
+			<input type="submit" value="Select" class="btn"/>
+		</form>
+		<div class="col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+			<p>Not a member? <a ng-click="signup()">Sign Up!</a></p>
+		</div>
+	</div>
+</div>

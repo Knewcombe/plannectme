@@ -1,0 +1,83 @@
+<div class="content row container-fluid">
+	<div class="well col-xs-10 col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+		<div class="alert alert-danger" ng-show="alert">
+			<p><strong>Error: </strong>{{error}}</p>
+		</div>
+		<label>Profile Information</label>
+		<form class="form-group form-horizontal col-md-offset-1 col-sm-offset-1 col-xs-offset-1" name"profile_form" ng_submit="submit()">
+				<div class="row padding-top padding-bottom">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<!--Profile Name-->
+						<label>First Name</label>
+				  	<input type="text" name="firstName" class="form-control" ng-model="profileFormData.firstName" required>
+				  	<p ng-show="profile_form.firstName.$invalid && !profile_form.firstName.$pristine" class="help-block">First name is required.</p>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<!--Profile Password-->
+						<label>Last Name</label>
+				  	<input type="text" name="lastName" class="form-control" ng-model="profileFormData.lastName" required>
+				  	<p ng-show="profile_form.lastName.$invalid && !profile_form.lastName.$pristine" class="help-block">Last name is required.</p>
+					</div>
+					</div>
+					<div class="row padding-bottom padding-top">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<!--Profile Password-->
+							<label>Password</label>
+					  	<input type="password" name="password" class="form-control" ng-model="profileFormData.password" required>
+					  	<p ng-show="profile_form.password.$invalid && !profile_form.password.$pristine" class="help-block">Password is required.</p>
+						</div>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<!--Profile Password-->
+							<label>Confirm Password</label>
+				  		<input type="password" name="confirm_password" class="form-control" ng-model="profileFormData.confirm_password" required>
+				  		<p ng-show="profile_form.confirm_password.$invalid && !profile_form.confirm_password.$pristine" class="help-block">Please confirm password.</p>
+						</div>
+					</div>
+					<div class="row padding-bottom padding-top">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<!--Profile Password-->
+							<label>Email</label>
+			  			<input type="email" name="email" class="form-control" ng-model="profileFormData.email" placeholder="email@email.com" required>
+			  			<p ng-show="profile_form.email.$invalid && !profile_form.email.$pristine" class="help-block">Email is required.</p>
+						</div>
+					</div>
+						<!--Profile Password-->
+					<div class="row padding-bottom padding-top">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<label>Date of Birth</label>
+				  		<input type="date" name="dob" class="form-control" ng-model="profileFormData.dob" required>
+				  		<p ng-show="profile_form.dob.$invalid && !profile_form.dob.$pristine" class="help-block">Please enter a vaild date of birth.</p>
+						</div>
+					</div>
+					<div class="row padding-bottom padding-top">
+						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+							<label>Gender</label>
+					  	<select name="gender" class="form-control selectInput" ng-model="profileFormData.gender" required>
+								<option disabled="disabled" value="">- please select -</option>
+								<option value="M">Male</option>
+								<option value="F">Female</option>
+							</select>
+					  	<p ng-show="profile_form.gender.$invalid && !profile_form.gender.$pristine" class="help-block">Please input your gender.</p>
+						</div>
+					</div>
+					<!--Country Password-->
+					<div class="row padding-bottom padding-top">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<label>Country</label>
+							<country-select name="country" class="form-control selectInput" ng-model="profileFormData.country" cs-priorities="CA, GB, US" required></country-select>
+							<p ng-show="profile_form.country.$invalid && !profile_form.country.$pristine" class="help-block">Please enter your country.</p>
+						</div>
+					</div>
+				<div class="form-group padding-bottom padding-top">
+					<div class="row">
+						<div ng-repeat="image in images track by $index" class="col-lg-5 col-md-5 col-xs-7 thumb">
+							<img class="thumbnail" ngf-thumbnail="image || './img/defaultImage/defaultImage.gif'"/>
+							<input type="file" ngf-select ng-model="images[$index]" name="file{{$index}}" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" />
+						</div>
+					</div>
+				</div>
+				<!--Submit Button-->
+				<input type="submit" value="Sign Up!" class="btn btn-default"/>
+			</form>
+	</div>
+</div>

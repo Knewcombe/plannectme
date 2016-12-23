@@ -1,0 +1,28 @@
+<div cg-busy="profiePromise">
+	<div class="content row container-fluid">
+			<div class="col-xs-10 col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+				<div ng-repeat="fav in profileData" class="well custom-well col-xs-3 col-sm-5 col-md-4" ng-click="toggleModal($index)">
+					<div class="row col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+						<h6 class="col-xs-3">{{fav.profile_id}}</h6>
+						<h6 class="col-xs-7 text-right">{{fav.countryName}}  {{fav.countryEmoji}}</h6>
+					</div>
+					<div class="row">
+						<div class="thumb">
+							<img ng-if="fav.images.length != 0" style="width:100%;" class="thumbnail" src="{{fav.images[0]}}"/>
+							<img ng-if="fav.images.length == 0" style="width:100%;" class="thumbnail" ng-src="./img/defaultImage/defaultImage.gif"/>
+						</div>
+					</div>
+					<div class="row col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+						<h5 class="col-xs-7">{{fav.avg}}%</h5>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+<div class='ng-modal' ng-show='modalShown'>
+	<div class='ng-modal-overlay' ng-click='toggleModal()'></div>
+	<div class='ng-modal-dialog' ng-style='dialogStyle'>
+		<div class='ng-modal-close' ng-click='toggleModal()'>X</div>
+		<div class='ng-modal-dialog-content' profile_view></div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+<div cg-busy="profiePromise">
+	<div class="content row container-fluid">
+		<div class="well custom-well col-xs-10 col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+			<div class="row text-center">
+				<div class="col-xs-6">
+					<h3>Average Rating: {{avg}}%</h3>
+				</div>
+				<div class="col-xs-6">
+					<h3>Favorites: {{favData}}</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<h6>Rating by country</h6>
+				</div>
+				<div id="chart">
+					<canvas id="doughnut" class="chart chart-doughnut"chart-data="chartData" chart-labels="chartLabels"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

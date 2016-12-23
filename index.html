@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+			<meta name="description" content="Photo Gallery with AngularJS and CSS3 - demo page"/>
+			<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+      <!-- SCROLLS -->
+      <!-- load bootstrap and fontawesome via CDN -->
+      <link rel="stylesheet" type="text/css" href="css/app.css" media="all"/>
+			<link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.7/css/bootstrap.min.css" media="all"/>
+			<link rel="stylesheet" type="text/css" href="js/node_modules/angularjs-slider/dist/rzslider.css"/>
+			<link rel="stylesheet" type="text/css" href="js/node_modules/angular-busy-master/dist/angular-busy.css"/>
+			<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+			<link rel="stylesheet" type="text/css" href="css/custom.css"/>
+			<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+			<script>
+			  // Initialize Firebase
+			  // TODO: Replace with your project's customized code snippet
+			  var config = {
+			    apiKey: "<API_KEY>",
+			    authDomain: "<PROJECT_ID>.firebaseapp.com",
+			    databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+			    storageBucket: "<BUCKET>.appspot.com",
+			    messagingSenderId: "<SENDER_ID>",
+			  };
+			  firebase.initializeApp(config);
+			</script>
+
+    </head>
+		<body>
+			<!--CONTENT-->
+			<nav-header></nav-header>
+			<div class="container">
+				<div>
+					<div>
+						<div id="view" class="viewPadding" ng-view ></div>
+					</div>
+				</div>
+			</div>
+			<!-- SCRIPTS -->
+			<!--Angular code will be pulled into the file itself to not cuase issues in the future-->
+			<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-animate.min.js"></script>
+			<script src="https://code.angularjs.org/1.2.25/angular-touch.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
+
+			<script type="text/javascript" src="js/node_modules/ng-country-select/dist/ng-country-select.min.js"></script>
+			<script type="text/javascript" src="js/node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+			<script type="text/javascript" src="js/node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+			<script type="text/javascript" src="js/node_modules/angularjs-slider/dist/rzslider.min.js"></script>
+			<script type="text/javascript" src="js/node_modules/chart.js/dist/Chart.min.js"></script>
+			<script type="text/javascript" src="js/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+			<script type="text/javascript" src="js/node_modules/angular-busy-master/dist/angular-busy.js"></script>
+
+			<script type="text/javascript" src="js/index.js"></script>
+			<script type="text/javascript" src="js/app.js"></script>
+			<script type="text/javascript" src="js/router.js"></script>
+
+			<script type="text/javascript" src="js/constance/api_constance.js"></script>
+
+			<script type="text/javascript" src="js/controllers/home_controller.js"></script>
+			<script type="text/javascript" src="js/controllers/profile_controller.js"></script>
+			<script type="text/javascript" src="js/controllers/dashboard_controller.js"></script>
+
+			<script type="text/javascript" src="js/vendor/ngStorage.js"></script>
+
+			<script type="text/javascript" src="js/services/profiles_service.js"></script>
+			<script type="text/javascript" src="js/services/control_user_service.js"></script>
+			<script type="text/javascript" src="js/services/auto_signin_service.js"></script>
+
+			<script type="text/javascript" src="js/directive/nav_bar_directive.js"></script>
+			<script type="text/javascript" src="js/directive/profile_directive.js"></script>
+			<script type="text/javascript" src="js/model/loading_model.js"></script>
+
+			<script type="text/javascript" src="js/factory/country_factory.js"></script>
+
+      <script type="text/javascript" src="css/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+		</body>
+</html>
