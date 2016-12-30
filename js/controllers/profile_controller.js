@@ -25,7 +25,6 @@ angular.module("app").controller('CreateProfile', function($scope, $location, $r
 	}
 
 	$scope.submit = function(){
-		console.log($scope.profileFormData.password + " " + $scope.profileFormData.confirm_password)
 		if($scope.profileFormData.password === $scope.profileFormData.confirm_password){
 			$scope.profiePromise[0] = UserControlService.setUser($scope.profileFormData).then(function(){
 				//Auto sign in..
@@ -54,7 +53,7 @@ angular.module("app").controller('CreateProfile', function($scope, $location, $r
 				})
 			})
 		}else{
-			$scope.error = "Password do not match, please try again.";
+			$scope.error = "Passwords do not match, please try again.";
 			$scope.alert = true;
 		}
 	}
@@ -118,6 +117,8 @@ angular.module("app").controller('Profile', function($scope, $location, $rootSco
 		'dob': $scope.date,
 		'email': $sessionStorage.user.userInfo.user_email
 	}
+
+	console.log($scope.profileFormData.dob);
 
 	$scope.passwordChange = {
 		'confirmPassword': '',

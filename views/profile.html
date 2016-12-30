@@ -23,7 +23,10 @@
 								<div class="row">
 									<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 										<label>Date of Birth</label>
-							  		<input type="date" name="dob" id="datePicker" class="form-control" ng-model="profileFormData.dob" required>
+										<datepicker date-format="yyyy-MM-dd">
+										  <input datepicker ng-model="profileFormData.dob" type="text" class="form-control"/>
+										</datepicker>
+							  		<!-- <input type="date" name="dob" id="datePicker" class="form-control" ng-model="profileFormData.dob" required> -->
 							  		<p ng-show="profile_form.dob.$invalid && !profile_form.dob.$pristine" class="help-block">Please enter a valid date of birth.</p>
 									</div>
 									<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
