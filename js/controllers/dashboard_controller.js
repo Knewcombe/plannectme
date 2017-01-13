@@ -13,6 +13,45 @@ angular.module("app").controller('DashboardController', function($scope, $locati
 	$scope._Index = 0;
 	$scope.profiePromise = []
 
+	$scope.searchOptions = {
+		'country': '',
+		'gender': '',
+		'age':{
+			'min': 18,
+			'max': 25
+		}
+	}
+
+	$(function() {
+  	$("#age-slider").slider({
+			range:true,
+			min: 18,
+			max: 100,
+			values: [ $scope.searchOptions.age.min, $scope.searchOptions.age.max ],
+			slide: function( event, ui ) {
+				$( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+				$scope.searchOptions.age.min = ui.values[0];
+				$scope.searchOptions.age.max = ui.values[1];
+			}
+		});
+
+		$( "#amount" ).val($( "#age-slider" ).slider( "values", 0 ) +" - " + $( "#age-slider" ).slider( "values", 1 ) );
+	});
+
+	$scope.submitSearch = function(){
+		if($scope.searchOptions.country == null){
+			$scope.searchOptions.country = "";
+		};
+		$scope.profiePromise[4] = ProfileServices.getProfiles($sessionStorage.user.token, $sessionStorage.user.userInfo.profile_id, $sessionStorage.user.profile.country, 0, $scope.searchOptions).then(function(data){
+			if(data.length != 0){
+				$scope.profileData = data;
+				getInfo();
+			}else{
+				console.log("No new profiles have been added, this will give the user a message or change the directive.");
+			}
+		});
+	}
+
 	var getInfo = function(){
 		$scope.images = []; // clear array
 		//Find country data
@@ -23,11 +62,14 @@ angular.module("app").controller('DashboardController', function($scope, $locati
 			}
 		});
 		//Get profile images.
+		console.log($scope.profileData);
+		console.log($scope.profileIndex);
 		$scope.profiePromise[1] = ProfileServices.getProfilePics($scope.profileData[$scope.profileIndex].profile_id, $sessionStorage.user.token).then(function(data){
 			$.each(data, function(index, value){
 				$scope.images[index] = 'data:image/JPEG;base64,'+ value.image;
 			});
 		})
+
 		$scope.profiePromise[2] = ProfileServices.getAverage($sessionStorage.user.token, $scope.profileData[$scope.profileIndex].profile_id).then(function(data){
 			$scope.profileAverage = data.replace("'", "").replace("'", "");
 		});
@@ -50,13 +92,14 @@ angular.module("app").controller('DashboardController', function($scope, $locati
 	//Getting a list of profiles.
 	//Later will need to check for profile types, this will see what profiles can be viewed at what time.
 	$scope.getProfiles = function(){
-		$scope.profiePromise[0] = ProfileServices.getProfiles($sessionStorage.user.token, $sessionStorage.user.userInfo.profile_id, $scope.profileData).then(function(data){
+		$scope.profiePromise[0] = ProfileServices.getProfiles($sessionStorage.user.token, $sessionStorage.user.userInfo.profile_id, $sessionStorage.user.profile.country, $scope.profileData, $scope.searchOptions).then(function(data){
 			if(data.length != 0){
 				if($scope.profileData.length > 0){
 					$scope.profileData += data;
 					++$scope.profileIndex;
 				}else{
 					$scope.profileData = data;
+					console.log($scope.profileData)
 				}
 				getInfo();
 			}else{

@@ -66,6 +66,33 @@ angular.module("app").service('UserControlService', ['$localStorage', '$sessionS
 		return deferred.promise;
 	}
 
+	this.updateUserOptions = function(options, profileId, token){
+		console.log(options);
+		var request = {
+			'profileId': profileId,
+			'options': options
+		}
+		var deferred = $q.defer();
+		$http.post(API_CONN.NODE_SERVER+'/api/users/update_options?token='+token, request)
+		.success(function(data){
+			console.log("Worked")
+			if(data.success == false){
+				console.log("Token is not valid");
+				$sessionStorage.user = null;
+				$location.path("/signin");
+			}else{
+				console.log("Token valid");
+				deferred.resolve(data);
+			}
+		})
+		.error(function(data){
+			console.log('Error: ' + data);
+			$sessionStorage.user = null;
+			$location.path("/error");
+		})
+		return deferred.promise;
+	}
+
 	this.changePassword = function(userId, oldPass, newPass, token){
 		var deferred = $q.defer();
 		var request = {

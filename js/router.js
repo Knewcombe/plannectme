@@ -29,6 +29,48 @@ angular.module("app").config(function($routeProvider, $locationProvider){
 			}
 	});
 
+	$routeProvider.when('/signup/information',{
+		templateUrl: 'views/sign_up-information.html',
+		controller: 'CreateProfile',
+		resolve:{
+        "check":function($location, $localStorage, $sessionStorage){
+            if($sessionStorage.user != null){
+                //Do something
+								$location.path('/profile');    //redirect user to home.
+                //alert("You have access here");
+						}
+        }
+			}
+	});
+
+	$routeProvider.when('/signup/images',{
+		templateUrl: 'views/sign_up-images.html',
+		controller: 'CreateProfile',
+		resolve:{
+        "check":function($location, $localStorage, $sessionStorage){
+            if($sessionStorage.user != null){
+                //Do something
+								$location.path('/profile');    //redirect user to home.
+                //alert("You have access here");
+						}
+        }
+			}
+	});
+
+	$routeProvider.when('/signup/preferences',{
+		templateUrl: 'views/sign_up-preferences.html',
+		controller: 'CreateProfile',
+		resolve:{
+        "check":function($location, $localStorage, $sessionStorage){
+            if($sessionStorage.user != null){
+                //Do something
+								$location.path('/profile');    //redirect user to home.
+                //alert("You have access here");
+						}
+        }
+			}
+	});
+
 	$routeProvider.when('/test',{
 		templateUrl: 'views/testUpload.html',
 		controller: 'TestUpload'

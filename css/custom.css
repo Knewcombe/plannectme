@@ -30,8 +30,54 @@ html {
   width:100%;
 }
 
+/* form styling */
+#form-container                { background:#2f2f2f; margin-bottom:20px;
+    border-radius:5px; }
+#form-container .page-header   { background:#151515; margin:0; padding:30px;
+    border-top-left-radius:5px; border-top-right-radius:5px; }
+
+/* numbered buttons */
+#status-buttons                 {  }
+#status-buttons a               { color:#5B6937; display:inline-block; font-size:12px; margin:10px; text-align:center; text-transform:uppercase; }
+#status-buttons a:hover         { text-decoration:none; }
+
+/* we will style the span as the circled number */
+#status-buttons span            { background:#080808; display:block; height:30px; margin:0 auto 10px; padding-top:5px; width:30px;
+    border-radius:50%; }
+
+/* active buttons turn light green-blue*/
+#status-buttons a.active span   { background:#F1F6E3; color:#5B6937; border: 1px solid #B8D370;}
+
 .padding-top{
 	padding-top: 10px;
+}
+
+.ui-age-text{
+	border:0;
+	color:#E7D4F8;
+	font-weight:bold;
+	background-color: transparent;
+}
+
+.ui-widget-header {
+  border: 1px solid #E7D4F8;
+  background-color: #F4F2F7;
+  color: #E7D4F8;
+  font-weight: bold;
+}
+
+.ui-slider-handle{
+	border-radius: 50%;
+	position: absolute;
+  display: inline-block;
+	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3), 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.ui-slider .ui-slider-handle{
+	width: 15px;
+	height: 15px;
+	background-color: #F1F6E3;
+	border: 1px solid #E7D4F8;
 }
 
 .padding-bottom{

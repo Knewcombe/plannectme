@@ -10,11 +10,28 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12">
-					<h6>Rating by country</h6>
-				</div>
-				<div id="chart">
-					<canvas id="doughnut" class="chart chart-doughnut"chart-data="chartData" chart-labels="chartLabels"></canvas>
+				<div ng-switch on="allowRating">
+					<div ng-switch-when="1">
+						<div class="col-xs-12">
+							<h6>Rating by country</h6>
+						</div>
+						<div ng-if="!noRatings" id="chart">
+							<canvas id="doughnut" class="chart chart-doughnut"chart-data="chartData" chart-labels="chartLabels"></canvas>
+						</div>
+						<div ng-if="noRatings" class="col-xs-10 col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+							<h2 class="text-center">No Ratings yet.</h2>
+							<p class="text-center">
+								No one has Rated your profile, please try again later.
+							</p>
+						</div>
+					</div>
+					<div ng-switch-when="0" class="col-xs-10 col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+						<h2 class="text-center">Ratings not avalible.</h2>
+						<p class="text-left">
+							 Ratings statisics is not avalible because you have 'Ratings' turned off.
+							</br>If you would like to see what other people rate you as, go to your Profile and select Yes for 'Allow Rating'
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>

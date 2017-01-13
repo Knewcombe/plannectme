@@ -1,86 +1,160 @@
-<div class="content row container-fluid">
+<div class="content row container-fluid" ng-init="step = 0">
 	<div class="well col-xs-10 col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-		<div class="alert alert-danger" ng-show="alert">
-			<p><strong>Error: </strong>{{error}}</p>
-		</div>
-		<label>Profile Information</label>
-		<form class="form-group form-horizontal col-md-offset-1 col-sm-offset-1 col-xs-offset-1" name"profile_form" ng_submit="submit()">
-				<div class="row padding-top padding-bottom">
-					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-						<!--Profile Name-->
-						<label>First Name</label>
-				  	<input type="text" name="firstName" class="form-control" ng-model="profileFormData.firstName" required>
-				  	<p ng-show="profile_form.firstName.$invalid && !profile_form.firstName.$pristine" class="help-block">First name is required.</p>
-					</div>
-					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-						<!--Profile Password-->
-						<label>Last Name</label>
-				  	<input type="text" name="lastName" class="form-control" ng-model="profileFormData.lastName" required>
-				  	<p ng-show="profile_form.lastName.$invalid && !profile_form.lastName.$pristine" class="help-block">Last name is required.</p>
-					</div>
-					</div>
-					<div class="row padding-bottom padding-top">
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<!--Profile Password-->
-							<label>Password</label>
-					  	<input type="password" name="password" class="form-control" ng-model="profileFormData.password" required>
-					  	<p ng-show="profile_form.password.$invalid && !profile_form.password.$pristine" class="help-block">Password is required.</p>
-						</div>
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<!--Profile Password-->
-							<label>Confirm Password</label>
-				  		<input type="password" name="confirm_password" class="form-control" ng-model="profileFormData.confirm_password" required>
-				  		<p ng-show="profile_form.confirm_password.$invalid && !profile_form.confirm_password.$pristine" class="help-block">Please confirm password.</p>
-						</div>
-					</div>
-					<div class="row padding-bottom padding-top">
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<!--Profile Password-->
-							<label>Email</label>
-			  			<input type="email" name="email" class="form-control" ng-model="profileFormData.email" placeholder="email@email.com" required>
-			  			<p ng-show="profile_form.email.$invalid && !profile_form.email.$pristine" class="help-block">Email is required.</p>
-						</div>
-					</div>
-						<!--Profile Password-->
-					<div class="row padding-bottom padding-top">
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<label>Date of Birth</label>
-							<datepicker date-format="yyyy-MM-dd">
-							  <input datepicker ng-model="profileFormData.dob" type="text" placeholder="YYYY-MM-DD" class="form-control"/>
-							</datepicker>
-				  		<!-- <input type="date" name="dob" class="form-control" ng-model="profileFormData.dob" required> -->
-				  		<p ng-show="profile_form.dob.$invalid && !profile_form.dob.$pristine" class="help-block">Please enter a vaild date of birth.</p>
-						</div>
-					</div>
-					<div class="row padding-bottom padding-top">
-						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<label>Gender</label>
-					  	<select name="gender" class="form-control selectInput" ng-model="profileFormData.gender" required>
-								<option disabled="disabled" value="">- please select -</option>
-								<option value="M">Male</option>
-								<option value="F">Female</option>
-							</select>
-					  	<p ng-show="profile_form.gender.$invalid && !profile_form.gender.$pristine" class="help-block">Please input your gender.</p>
-						</div>
-					</div>
-					<!--Country Password-->
-					<div class="row padding-bottom padding-top">
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<label>Country</label>
-							<country-select name="country" class="form-control selectInput" ng-model="profileFormData.country" cs-priorities="CA, GB, US" required></country-select>
-							<p ng-show="profile_form.country.$invalid && !profile_form.country.$pristine" class="help-block">Please enter your country.</p>
-						</div>
-					</div>
-				<div class="form-group padding-bottom padding-top">
-					<div class="row">
-						<div ng-repeat="image in images track by $index" class="col-lg-5 col-md-5 col-xs-7 thumb">
-							<img class="thumbnail" ngf-thumbnail="image || './img/defaultImage/defaultImage.gif'"/>
-							<input type="file" ngf-select ng-model="images[$index]" name="file{{$index}}" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" />
-						</div>
-					</div>
+        <div class="page-header text-center">
+            <h2>Welcome</h2>
+            <!-- the links to our nested states using relative paths -->
+            <!-- add the active class if the state matches our ui-sref -->
+            <div id="status-buttons" class="text-center row">
+                <a ng-class="{'active': step == 0}" ng-click="step = 0"><span>1</span>Profile</a>
+                <a ng-show="step != 0" ng-class="{'active': step == 1}" ng-click="step = 1"><span>2</span>Pictures</a>
+                <a ng-show="step != 0" ng-class="{'active': step == 2}" ng-click="step = 2"><span>3</span>Options</a>
+            </div>
+        </div>
+				<div class="alert alert-danger" ng-show="alert">
+						<p><strong>Error: </strong>{{error}}</p>
 				</div>
-				<!--Submit Button-->
-				<input type="submit" value="Sign Up!" class="btn btn-default"/>
-			</form>
-	</div>
+        <!-- use ng-submit to catch the form submission and use our Angular function -->
+        	<form id="user-form" class="form-group form-horizontal col-md-offset-2 col-sm-offset-2 col-xs-offset-2" name"profile_form" ng_submit="nextStep()">
+            <!-- our nested state views will be injected here -->
+						<div ng-show="step == 0">
+							<label>Profile Information</label>
+									<div class="row padding-top padding-bottom">
+										<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+											<!--Profile Name-->
+											<label>First Name</label>
+									  	<input type="text" name="firstName" class="form-control" ng-model="profileFormData.firstName" required>
+									  	<p ng-show="profile_form.firstName.$invalid && !profile_form.firstName.$pristine" class="help-block">First name is required.</p>
+										</div>
+										<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+											<!--Profile Password-->
+											<label>Last Name</label>
+									  	<input type="text" name="lastName" class="form-control" ng-model="profileFormData.lastName" required>
+									  	<p ng-show="profile_form.lastName.$invalid && !profile_form.lastName.$pristine" class="help-block">Last name is required.</p>
+										</div>
+										</div>
+										<div class="row padding-bottom padding-top">
+											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+												<!--Profile Password-->
+												<label>Password</label>
+										  	<input type="password" name="password" class="form-control" ng-model="profileFormData.password" required>
+										  	<p ng-show="profile_form.password.$invalid && !profile_form.password.$pristine" class="help-block">Password is required.</p>
+											</div>
+											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+												<!--Profile Password-->
+												<label>Confirm Password</label>
+									  		<input type="password" name="confirm_password" class="form-control" ng-model="profileFormData.confirm_password" required>
+									  		<p ng-show="profile_form.confirm_password.$invalid && !profile_form.confirm_password.$pristine" class="help-block">Please confirm password.</p>
+											</div>
+										</div>
+										<div class="row padding-bottom padding-top">
+											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+												<!--Profile Password-->
+												<label>Email</label>
+								  			<input type="email" name="email" class="form-control" ng-model="profileFormData.email" placeholder="email@email.com" required>
+								  			<p ng-show="profile_form.email.$invalid && !profile_form.email.$pristine" class="help-block">Email is required.</p>
+											</div>
+										</div>
+											<!--Profile Password-->
+										<div class="row padding-bottom padding-top">
+											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+												<label>Date of Birth</label>
+												<datepicker date-format="yyyy-MM-dd">
+												  <input date-time ng-change="dateChange()" ng-model="profileFormData.dob" type="text" placeholder="YYYY-MM-DD" class="form-control" required/>
+												</datepicker>
+									  		<!-- <input type="date" name="dob" class="form-control" ng-model="profileFormData.dob" required> -->
+									  		<p ng-show="profile_form.dob.$invalid && !profile_form.dob.$pristine" class="help-block">Please enter a vaild date of birth.</p>
+											</div>
+										</div>
+										<div class="row padding-bottom padding-top">
+											<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+												<label>Gender</label>
+										  	<select name="gender" class="form-control selectInput" ng-model="profileFormData.gender" required>
+													<option disabled="disabled" value="">- please select -</option>
+													<option value="M">Male</option>
+													<option value="F">Female</option>
+												</select>
+										  	<p ng-show="profile_form.gender.$invalid && !profile_form.gender.$pristine" class="help-block">Please input your gender.</p>
+											</div>
+										</div>
+										<!--Country Password-->
+										<div class="row padding-bottom padding-top">
+											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+												<label>Country</label>
+												<country-select name="country" class="form-control selectInput" ng-model="profileFormData.country" cs-priorities="CA, GB, US" required></country-select>
+												<p ng-show="profile_form.country.$invalid && !profile_form.country.$pristine" class="help-block">Please enter your country.</p>
+											</div>
+										</div>
+										<!-- <p class="btn btn-default" ng-click="nextStep()">Next</p> -->
+										<input type="submit" value="Next" class="btn btn-default"/>
+									</div>
+								</form>
+								<form id="signup-form" class="form-group form-horizontal col-md-offset-2 col-sm-offset-2 col-xs-offset-2" ng_submit="submit()">
+								<div ng-show="step == 1">
+									<label>Upload Pictures</label>
+									<div class="form-group padding-bottom padding-top">
+										<div class="row">
+											<div ng-repeat="image in images track by $index" class="col-lg-5 col-md-5 col-xs-7 thumb">
+												<img class="thumbnail" ngf-thumbnail="image || './img/defaultImage/defaultImage.gif'"/>
+												<input type="file" ngf-select ng-model="images[$index]" name="file{{$index}}" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+											<p class="btn btn-default" ng-click="prevStep()">Back</p>
+										</div>
+										<div class="text-right col-xs-5 col-sm-5 col-md-5 col-lg-5">
+											<p class="btn btn-default" ng-click="nextStep()">Next</p>
+										</div>
+									</div>
+								</div>
+								<div ng-show="step == 2">
+									<label>Options</label>
+									<div class="row padding-top padding-bottom">
+										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-bottom padding-top">
+											<label>Would you like other users to rate your profile?</label>
+											</br>
+												<div class="radio">
+												  <label><input type="radio" ng-model="profileFormData.options.rating" value="1">Yes</label>
+												</div>
+												<div class="radio">
+												  <label><input type="radio" ng-model="profileFormData.options.rating" value="0">No</label>
+												</div>
+											<span><strong>Note:</strong> Selecting 'No' will not allow other users to rate your profile.</span>
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-bottom padding-top">
+											<label>Would you like other users to see your rating average.</label>
+											</br>
+												<div class="radio">
+												  <label><input type="radio" ng-model="profileFormData.options.visiableRate" value="1">Yes</label>
+												</div>
+												<div class="radio">
+												  <label><input type="radio" ng-model="profileFormData.options.visiableRate" value="0">No</label>
+												</div>
+											<span><strong>Note:</strong> Other users will not see your average rating selecting 'No'.</span>
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-bottom padding-top">
+											<label>Do you want to be see in your country?</label>
+											</br>
+												<div class="radio">
+												  <label><input type="radio" ng-model="profileFormData.options.hidden" value="1">Yes</label>
+												</div>
+												<div class="radio">
+												  <label><input type="radio" ng-model="profileFormData.options.hidden" value="0">No</label>
+												</div>
+											<span><strong>Note:</strong> Selecting 'No' will prevent your profile from beeing viewed by users in your country.</span>
+										</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+												<p class="btn btn-default" ng-click="prevStep()">Back</p>
+											</div>
+											<div class="text-right col-xs-5 col-sm-5 col-md-5 col-lg-5">
+												<!--Submit Button-->
+												<input type="submit" value="Sign Up!" class="btn btn-default"/>
+											</div>
+										</div>
+							</div>
+					</form>
+    </div>
 </div>

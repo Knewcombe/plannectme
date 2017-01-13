@@ -1,17 +1,21 @@
 angular.module("app").service('ProfileServices', ['$localStorage', '$sessionStorage', '$q', '$http', '$rootScope', 'API_CONN' ,'Upload', '$location', function ($localStorage, $sessionStorage, $q, $http, $rootScope, API_CONN, Upload, $location) {
 
-	this.getProfiles = function(token, profileId, profileData){
+	this.getProfiles = function(token, profileId, country, profileData, searchOptions){
 		//This will gather a list of profiles to show the user.
 		var deferred = $q.defer();
 		console.log("Profile");
-		var request = [{
-			'profileId': profileId
-		}]
+		var request = {
+			'profileId': [profileId],
+			'requestCountry': country,
+			'searchOptions': searchOptions
+		}
 		if(profileData.length > 0){
 			$.each(profileData, function(key, value){
-				request.push({'profileId': value.profile_id});
+				console.log(request);
+				request.profileId.push(value.profile_id);
 			});
 		}
+		console.log(request);
 		$http.post(API_CONN.NODE_SERVER+"/api/profiles/getProfiles?token="+token, request)
 		.success(function(data) {
 					if(data.success == false){

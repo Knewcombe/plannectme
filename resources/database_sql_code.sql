@@ -8,6 +8,9 @@ CREATE TABLE planect_me_app.user_profile
 	profile_id INT NOT NULL AUTO_INCREMENT,
 	country VARCHAR(255) NOT NULL,
 	gender VARCHAR(255) NOT NULL,
+	allow_rating BOOLEAN NOT NULL,
+	visable_rating BOOLEAN NOT NULL,
+	hidden BOOLEAN NOT NULL,
 	CHECK(gender in ('M', 'F')),
 	PRIMARY KEY (profile_id)
 );
