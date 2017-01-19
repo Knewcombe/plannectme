@@ -5,11 +5,8 @@ angular.module("app").service('UserControlService', ['$localStorage', '$sessionS
 		$http.post(API_CONN.NODE_SERVER+"/auth/sign_up", user)
 		.success(function(data) {
 		        deferred.resolve();
-						console.log(data);
 		    })
 		    .error(function(data) {
-		        console.log('Error: ' + data);
-						console.log("Unable to connect to server");
 						$sessionStorage.user = null;
 						$location.path("/error");
 		    });
@@ -24,7 +21,6 @@ angular.module("app").service('UserControlService', ['$localStorage', '$sessionS
 		        deferred.resolve(data);
 		    })
 		    .error(function(data) {
-		        console.log('Error: ' + data);
 						$sessionStorage.user = null;
 						$location.path("/error");
 		    });
@@ -45,21 +41,17 @@ angular.module("app").service('UserControlService', ['$localStorage', '$sessionS
 	}
 
 	this.updateUser = function(user, token){
-		console.log(user);
 		var deferred = $q.defer();
 		$http.post(API_CONN.NODE_SERVER+'/api/users/update_user?token='+token, user)
 		.success(function(data){
 			if(data.success == false){
-				console.log("Token is not valid");
 				$sessionStorage.user = null;
 				$location.path("/signin");
 			}else{
-				console.log("Token valid");
 				deferred.resolve(data);
 			}
 		})
 		.error(function(data){
-			console.log('Error: ' + data);
 			$sessionStorage.user = null;
 			$location.path("/error");
 		})
@@ -67,7 +59,6 @@ angular.module("app").service('UserControlService', ['$localStorage', '$sessionS
 	}
 
 	this.updateUserOptions = function(options, profileId, token){
-		console.log(options);
 		var request = {
 			'profileId': profileId,
 			'options': options
@@ -75,18 +66,14 @@ angular.module("app").service('UserControlService', ['$localStorage', '$sessionS
 		var deferred = $q.defer();
 		$http.post(API_CONN.NODE_SERVER+'/api/users/update_options?token='+token, request)
 		.success(function(data){
-			console.log("Worked")
 			if(data.success == false){
-				console.log("Token is not valid");
 				$sessionStorage.user = null;
 				$location.path("/signin");
 			}else{
-				console.log("Token valid");
 				deferred.resolve(data);
 			}
 		})
 		.error(function(data){
-			console.log('Error: ' + data);
 			$sessionStorage.user = null;
 			$location.path("/error");
 		})
@@ -100,24 +87,19 @@ angular.module("app").service('UserControlService', ['$localStorage', '$sessionS
 			'newPassword': newPass,
 			'userId': userId
 		}
-		console.log(request);
 		$http.post(API_CONN.NODE_SERVER+'/api/users/change_password?token='+token, request)
 			.success(function(data){
 				if(data.success == false){
-					console.log("Token is not valid");
 					$sessionStorage.user = null;
 					$location.path("/signin");
 				}else{
-					console.log("Token valid");
 					deferred.resolve(data);
 				}
 			})
 			.error(function(data){
-				console.log('Error: ' + data);
 				$sessionStorage.user = null;
 				$location.path("/error");
 			})
 			return deferred.promise;
 	}
-
 }]);

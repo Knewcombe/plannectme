@@ -7,6 +7,8 @@ angular.module("app").controller('CreateProfile', function($scope, $location, $r
 	$scope.alert = false;
 	$scope.step = 0;
 	$scope.formComplete = false;
+	$scope.ratingAge = false;
+	$scope.ageChange = false;
 
 	$rootScope.url = $location.path();
 
@@ -23,8 +25,8 @@ angular.module("app").controller('CreateProfile', function($scope, $location, $r
 		'dob': '',
 		'email':'',
 		'options':{
-			'rating': 1,
-			'visiableRate': 1,
+			'rating': 0,
+			'visiableRate': 0,
 			'hidden': 1
 		}
 	}
@@ -38,19 +40,22 @@ angular.module("app").controller('CreateProfile', function($scope, $location, $r
 			age--;
 		}
 		if(age){
-			console.log(age);
+			if(age > 18){
+				$scope.profileFormData.options.rating = 1;
+				$scope.profileFormData.options.visiableRate = 1;
+			}else{
+				$scope.ratingAge = true;
+			}
 		}
 	}
 
 	$scope.nextStep = function(){
-		console.log("test");
 		if($scope.step == 0){
-			console.log("0");
 			if($scope.profileFormData.password === $scope.profileFormData.confirm_password){
-				console.log("Match");
 				if($scope.alert){
 					$scope.alert = false;
 				}
+				$scope.ageChange = true;
 				++$scope.step;
 			}else{
 				$scope.error = "Passwords do not match, please try again.";
@@ -140,11 +145,26 @@ angular.module("app").controller('Profile', function($scope, $location, $rootSco
 	$scope.optionsError;
 	$scope.optionsAlert = false;
 
-	var d = new Date($sessionStorage.user.userInfo.date_of_birth);
+	$scope.ratingAge = false;
+
+	// var d = new Date($sessionStorage.user.userInfo.date_of_birth);
 	$rootScope.url = $location.path();
-	$scope.date = d.getFullYear() +"-"+ (d.getMonth()+1) +"-"+ d.getDate();
+	//$scope.date = d.getFullYear() +"-"+ (d.getMonth()+1) +"-"+ d.getDate();
 
 	$scope.images = [];
+
+	var today = new Date();
+	var birthDate = new Date($sessionStorage.user.userInfo.date_of_birth);
+	var age = today.getFullYear() - birthDate.getFullYear();
+	var m = today.getMonth() - birthDate.getMonth();
+	if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())){
+		age--;
+	}
+	if(age){
+		if(!age > 18){
+			$scope.ratingAge = true;
+		}
+	}
 
 	for(var i = 0; 5 > i; i++){
 		$scope.images[i] = {
@@ -159,7 +179,6 @@ angular.module("app").controller('Profile', function($scope, $location, $rootSco
 		'lastName': $sessionStorage.user.userInfo.last_name,
 		'gender': $sessionStorage.user.profile.gender,
 		'country': $sessionStorage.user.profile.country,
-		'dob': $scope.date,
 		'email': $sessionStorage.user.userInfo.user_email,
 		'options':{
 			'rating': $sessionStorage.user.profile.allow_rating,
@@ -168,8 +187,6 @@ angular.module("app").controller('Profile', function($scope, $location, $rootSco
 		}
 	}
 
-
-	console.log($scope.profileFormData.dob);
 
 	$scope.passwordChange = {
 		'confirmPassword': '',
@@ -190,7 +207,8 @@ angular.module("app").controller('Profile', function($scope, $location, $rootSco
 			if(value.image.name){
 				//This is where I will update the photos that are needed.
 				$scope.profiePromise[1] = ProfileServices.updatePhotos($sessionStorage.user.token, $sessionStorage.user.userInfo.profile_id, value.image, value.pictureId).then(function(data){
-					console.log("Complete");
+					// console.log("Complete");
+					//Will need to add something here that will make it more appleing
 				});
 			}
 		});
@@ -223,8 +241,8 @@ angular.module("app").controller('Profile', function($scope, $location, $rootSco
 	$scope.submitProfile = function(){
 		//Will make sure everything is correct and submit.
 		if($scope.profileFormData.firstName != $sessionStorage.user.userInfo.first_name || $scope.profileFormData.lastName != $sessionStorage.user.userInfo.last_name ||
-			$scope.profileFormData.gender != $sessionStorage.user.profile.gender || $scope.profileFormData.country != $sessionStorage.user.profile.country ||
-			$scope.profileFormData.dob != $scope.date || $scope.profileFormData.email != $sessionStorage.user.userInfo.user_email){
+			$scope.profileFormData.gender != $sessionStorage.user.profile.gender || $scope.profileFormData.country != $sessionStorage.user.profile.country
+			|| $scope.profileFormData.email != $sessionStorage.user.userInfo.user_email){
 
 				$scope.profileFormData.userId = $sessionStorage.user.userInfo.user_id;
 				$scope.profileFormData.profileId = $sessionStorage.user.userInfo.profile_id;
@@ -242,18 +260,14 @@ angular.module("app").controller('Profile', function($scope, $location, $rootSco
 					}
 				});
 			}else{
-				console.log("No changes were made");
 				$scope.profileError = "No changes have been made to User Information.";
 				$scope.profileAlert = true;
 			}
 	}
 
 	$scope.submitOptions = function(){
-		console.log($scope.profileFormData)
-		console.log($sessionStorage.user)
 		if($scope.profileFormData.options.rating != $sessionStorage.user.profile.allow_rating || $scope.profileFormData.options.visiableRate != $sessionStorage.user.profile.visable_rating ||
 		$scope.profileFormData.options.hidden != $sessionStorage.user.profile.hidden){
-			console.log("Options have changed");
 			$scope.profiePromise[4] = UserControlService.updateUserOptions($scope.profileFormData.options, $sessionStorage.user.userInfo.profile_id, $sessionStorage.user.token).then(function(data){
 				$sessionStorage.user.profile = data.profile;
 				if($scope.optionsAlert){
@@ -262,7 +276,6 @@ angular.module("app").controller('Profile', function($scope, $location, $rootSco
 				}
 			});
 		}else{
-			console.log("Options are not changed");
 			$scope.optionsError = "No changes have been made to Options.";
 			$scope.optionsAlert = true;
 
@@ -285,8 +298,6 @@ angular.module("app").controller('Favorite', function($scope, $location, $rootSc
 	$scope._Index = 0;
 	$scope.profileFav = false;
 	$scope.profiePromise = [];
-
-	console.log($scope.profileData);
 
 	$scope.removeFavourite = function(index){
 		if(index != undefined){
@@ -323,7 +334,8 @@ angular.module("app").controller('Favorite', function($scope, $location, $rootSc
 					onEnd: function() {
 						//Will call the rating function here.
 						ProfileServices.rateProfile($sessionStorage.user.token, $sessionStorage.user.userInfo.profile_id, $scope.profileData[$scope.profileIndex].profile_id, $scope.slider.value).then(function(){
-							console.log("Complete");
+							// console.log("Complete");
+							//Will add something here to make it more appeling too.
 						})
 					}
 			}
@@ -343,20 +355,19 @@ angular.module("app").controller('Favorite', function($scope, $location, $rootSc
 	$scope.profiePromise[0] = ProfileServices.findAllFavourite($sessionStorage.user.token, $sessionStorage.user.userInfo.profile_id).then(function(favData){
 		if(favData != 'false'){
 			$.each(favData, function(index, value){
-				$scope.profiePromise[1] = ProfileServices.getProfileData($sessionStorage.user.token, value.fav_profile_id).then(function(data){
-					$scope.profileData.push(data[0]);
+				$scope.profiePromise[1] = ProfileServices.getProfileData($sessionStorage.user.token, value.fav_profile_id, $sessionStorage.user.profile.country).then(function(data){
+					if(data != 'false'){
+						$scope.profileData.push(data[0]);
+					}
 					if(index + 1 >= favData.length){
 						$.each($scope.profileData, function(profileIndex, profileValue){
 							$scope.profiePromise[2] = ProfileServices.getProfilePics($scope.profileData[profileIndex].profile_id, $sessionStorage.user.token).then(function(data){
-								// console.log($scope.profileData[profileIndex].profile_id);
-								// console.log(data);
 								$scope.profileData[profileIndex].images = [];
 								$.each(data, function(imageIndex, imageValue){
 									$scope.profileData[profileIndex].images[imageIndex] = 'data:image/JPEG;base64,'+ imageValue.image;
 								});
 							});
 							$scope.profiePromise[3] = ProfileServices.getRating($sessionStorage.user.token, $sessionStorage.user.userInfo.profile_id, $scope.profileData[profileIndex].profile_id).then(function(data){
-								// console.log(data);
 								if(data != 0){
 									$scope.profileData[profileIndex].rating = data[0].rate_amount;
 								}else{
@@ -382,7 +393,8 @@ angular.module("app").controller('Favorite', function($scope, $location, $rootSc
 			});
 		});
 		}else{
-			console.log("error");
+			// console.log("error");
+			//Will add something here to make it more appleing.
 		}
 	});
 
@@ -442,7 +454,6 @@ angular.module("app").controller('StatusController', function($scope, $location,
 
 	$scope.profiePromise[0] = ProfileServices.getAllRating($sessionStorage.user.token, $sessionStorage.user.userInfo.profile_id).then(function(statusData){
 		$scope.profileStatus = statusData;
-		console.log($scope.profileStatus);
 		if($scope.profileStatus != "false"){
 			$scope.noRatings = false;
 			$.each($scope.profileStatus, function(index, value){
@@ -451,7 +462,8 @@ angular.module("app").controller('StatusController', function($scope, $location,
 					$scope.profileStatus[index].profileData = profileData[0];
 
 				}, function(err){
-					console.log(err);
+					// console.log(err);
+					//Will add something here to make it more appleing.
 				}).finally(function(){
 					if(index + 1 >= $scope.profileStatus.length){
 						test();
@@ -459,11 +471,11 @@ angular.module("app").controller('StatusController', function($scope, $location,
 				});
 			});
 		}else{
-			console.log("None");
 			$scope.noRatings = true;
 		}
 	}, function(err){
-		console.log(err);
+		// console.log(err);
+		//Will add something here to make it more appleing.
 	});
 
 	$scope.profiePromise[2] = ProfileServices.getFavAmount($sessionStorage.user.token, $sessionStorage.user.userInfo.profile_id).then(function(favData){

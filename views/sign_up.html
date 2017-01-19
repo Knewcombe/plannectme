@@ -59,7 +59,7 @@
 											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 												<label>Date of Birth</label>
 												<datepicker date-format="yyyy-MM-dd">
-												  <input date-time ng-change="dateChange()" ng-model="profileFormData.dob" type="text" placeholder="YYYY-MM-DD" class="form-control" required/>
+												  <input date-time ng-change="dateChange()" ng-model="profileFormData.dob" type="text" placeholder="YYYY-MM-DD" class="form-control" ng-disabled="ageChange" required/>
 												</datepicker>
 									  		<!-- <input type="date" name="dob" class="form-control" ng-model="profileFormData.dob" required> -->
 									  		<p ng-show="profile_form.dob.$invalid && !profile_form.dob.$pristine" class="help-block">Please enter a vaild date of birth.</p>
@@ -112,29 +112,29 @@
 									<label>Options</label>
 									<div class="row padding-top padding-bottom">
 										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-bottom padding-top">
-											<label>Would you like other users to rate your profile?</label>
+											<label>Would you like other members to rate your profile?</label>
 											</br>
 												<div class="radio">
-												  <label><input type="radio" ng-model="profileFormData.options.rating" value="1">Yes</label>
+												  <label><input type="radio" ng-model="profileFormData.options.rating" ng-disabled="ratingAge" value="1">Yes</label>
 												</div>
 												<div class="radio">
-												  <label><input type="radio" ng-model="profileFormData.options.rating" value="0">No</label>
+												  <label><input type="radio" ng-model="profileFormData.options.rating" ng-disabled="ratingAge" value="0">No</label>
 												</div>
-											<span><strong>Note:</strong> Selecting 'No' will not allow other users to rate your profile.</span>
+											<span><strong>Note:</strong> Selecting 'No' will not allow other members to rate your profile.</span>
 										</div>
 										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-bottom padding-top">
-											<label>Would you like other users to see your rating average.</label>
+											<label>Would you like other members to see your rating average.</label>
 											</br>
 												<div class="radio">
-												  <label><input type="radio" ng-model="profileFormData.options.visiableRate" value="1">Yes</label>
+												  <label><input type="radio" ng-model="profileFormData.options.visiableRate" ng-disabled="ratingAge" value="1">Yes</label>
 												</div>
 												<div class="radio">
-												  <label><input type="radio" ng-model="profileFormData.options.visiableRate" value="0">No</label>
+												  <label><input type="radio" ng-model="profileFormData.options.visiableRate" ng-disabled="ratingAge" value="0">No</label>
 												</div>
-											<span><strong>Note:</strong> Other users will not see your average rating selecting 'No'.</span>
+											<span><strong>Note:</strong> Other members will not see your average rating selecting 'No'.</span>
 										</div>
 										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-bottom padding-top">
-											<label>Do you want to be see in your country?</label>
+											<label>Do you want to be seen in your country?</label>
 											</br>
 												<div class="radio">
 												  <label><input type="radio" ng-model="profileFormData.options.hidden" value="1">Yes</label>
@@ -142,7 +142,7 @@
 												<div class="radio">
 												  <label><input type="radio" ng-model="profileFormData.options.hidden" value="0">No</label>
 												</div>
-											<span><strong>Note:</strong> Selecting 'No' will prevent your profile from beeing viewed by users in your country.</span>
+											<span><strong>Note:</strong> Selecting 'No' will prevent your profile from beeing viewed by members in your country.</span>
 										</div>
 										</div>
 										<div class="row">

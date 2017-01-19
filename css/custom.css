@@ -1,14 +1,21 @@
-/*.nav_background{
-	background-color: @gray-darker;
-}*/
+/**
+ * @license Plannectme v0.0.1
+ * (c) 2016-2017 Plannectme, Inc.
+ * License: Plannectme
+ */
 
+/*General styling*/
+/*--------------------------------*/
 * {
     margin: 0;
     padding: 0;
 }
 
 body{
-	background-color: #FAFAFA;
+	background-color: #FFF;
+	padding-bottom: 10%;
+	min-height: 200px;
+  padding-top: 70px;
 }
 
 img{
@@ -30,84 +37,137 @@ html {
   width:100%;
 }
 
-/* form styling */
-#form-container                { background:#2f2f2f; margin-bottom:20px;
-    border-radius:5px; }
-#form-container .page-header   { background:#151515; margin:0; padding:30px;
-    border-top-left-radius:5px; border-top-right-radius:5px; }
-
-/* numbered buttons */
-#status-buttons                 {  }
-#status-buttons a               { color:#5B6937; display:inline-block; font-size:12px; margin:10px; text-align:center; text-transform:uppercase; }
-#status-buttons a:hover         { text-decoration:none; }
-
-/* we will style the span as the circled number */
-#status-buttons span            { background:#080808; display:block; height:30px; margin:0 auto 10px; padding-top:5px; width:30px;
-    border-radius:50%; }
-
-/* active buttons turn light green-blue*/
-#status-buttons a.active span   { background:#F1F6E3; color:#5B6937; border: 1px solid #B8D370;}
-
-.padding-top{
-	padding-top: 10px;
+a {
+    color: #FFF;
+    text-decoration: none;
 }
 
-.ui-age-text{
-	border:0;
-	color:#E7D4F8;
-	font-weight:bold;
-	background-color: transparent;
+.well{
+	background-color: #0CC6E8;
+	border: 1px solid #0994AD;
 }
 
-.ui-widget-header {
-  border: 1px solid #E7D4F8;
-  background-color: #F4F2F7;
-  color: #E7D4F8;
-  font-weight: bold;
+.jumbotron{
+	background-color: #0CC6E8;
+	border: 1px solid #0994AD;
 }
 
-.ui-slider-handle{
-	border-radius: 50%;
-	position: absolute;
-  display: inline-block;
-	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3), 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
-}
-
-.ui-slider .ui-slider-handle{
-	width: 15px;
-	height: 15px;
-	background-color: #F1F6E3;
-	border: 1px solid #E7D4F8;
+.thumbnail{
+	  border: 1px solid #B8D370;
 }
 
 .padding-bottom{
 	padding-bottom: 10px;
 }
 
-.well{
-	background-color: #F4F2F7;
-	border: 1px solid #E7D4F8;
+.padding-top{
+	padding-top: 10px;
+}
+
+/*--------------------------------*/
+
+/* form styling */
+/*--------------------------------*/
+#form-container{
+	background:#2f2f2f;
+	margin-bottom:20px;
+  border-radius:5px;
+}
+
+#form-container .page-header {
+	background:#151515;
+	margin:0;
+	padding:30px;
+  border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+
+/* numbered buttons */
+#status-buttons{}
+#status-buttons a{
+	color:#5B6937;
+	display:inline-block;
+	font-size:12px; margin:10px;
+	text-align:center;
+	text-transform:uppercase;
+}
+#status-buttons a:hover{
+	text-decoration:none;
+}
+
+/* we will style the span as the circled number */
+#status-buttons span {
+	background:#080808;
+	display:block;
+	height:30px;
+	margin:0 auto 10px;
+	padding-top:5px; width:30px;
+  border-radius:50%;
+}
+
+/* active buttons turn light green-blue*/
+#status-buttons a.active span {
+	background:#F1F6E3;
+	color:#5B6937;
+	border: 1px solid #B8D370;
+}
+/*--------------------------------*/
+/*Custom Navbar styling*/
+/*--------------------------------*/
+.navbar-custom {
+  background-color: #0CC6E8;
+  border-color: #0994AD;
+}
+
+.navbar-white{
+	background-color: #FFF;
+	border-color: #eee;
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+	background-color: #2A0561;
+	color: #FFF;
 }
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
 	border-color: transparent;
 }
 
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+.navbar-custom .navbar-nav>.open>a, .navbar-custom .navbar-nav>.open>a:focus, .navbar-custom .navbar-nav>.open>a:hover {
 	color: #fff;
   background-color: transparent;
 }
 
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: #0DD5FA;
+}
+
+.navbar-custom .navbar-nav>.active>a{
+	background-color: #2A0561 !important;
+	color: #FFF;
+}
+
+.navbar-custom .navbar-nav>.active>a:focus{
+	color: #2F066E;
+}
+
+.navbar-custom .navbar-nav>.active>a:hover{
+	color: #FFF;
+	background-color: #35067A !important;
+}
+/*Dropdown navbar styling*/
+/*-----------------------*/
 .dropdown-menu {
-	background-color: #222;
+	background-color: #0CC6E8;
 }
 
 .dropdown-menu>li>a {
-	color: #9d9d9d;
+	color: #FFF;
 }
 
 .dropdown-menu .divider {
-	background-color: #9d9d9d;
+	background-color: #0994AD;
 }
 
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
@@ -121,47 +181,68 @@ html {
 	color: #fff;
 	background-color: transparent;
 }
-
-.navbar-inverse .navbar-nav>.active>a{
-	background-color: #DCE0D0 !important;
-	color: #5B6937;
-	border: 1px solid #B8D370;
+/*-----------------------*/
+/*--------------------------------*/
+/*Custom Jquery UI styling*/
+/*--------------------------------*/
+.ui-age-text{
+	border:0;
+	color:#0CC6E8;
+	font-weight:bold;
+	background-color: transparent;
 }
 
-.navbar-inverse .navbar-nav>.active>a:focus{
-	color: #F1F6E3;
-	border: 1px solid #F1F6E3;
+.ui-widget-header {
+  border: 1px solid #2A0561;
+  background-color: #2A0561;
+  color: #2A0561;
+  font-weight: bold;
 }
 
-.navbar-inverse .navbar-nav>.active>a:hover{
-	color: #F1F6E3;
-	border: 1px solid #F1F6E3;
+.ui-slider-handle{
+	border-radius: 50%;
+	position: absolute;
+  display: inline-block;
+	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3), 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
 }
 
-.jumbotron{
-	background-color: #F4F2F7;
-	border: 1px solid #E7D4F8;
+.ui-slider .ui-slider-handle{
+	width: 15px;
+	height: 15px;
+	background-color: #0CC6E8;
+	border: 1px solid #0994AD;
+}
+/*--------------------------------*/
+
+/*Button styling*/
+/*--------------------------------*/
+.btn-default{
+	background-color: #22D35C;
+	border: 1px solid #1CAD4C;
+	color: #0B471F;
 }
 
-.thumbnail{
-	  border: 1px solid #B8D370;
+.btn-default:hover {
+    color: #0B471F;
+    background-color: #28FA6D;
+    border: 1px solid #1CAD4C;
 }
+/*--------------------------------*/
 
-body {
-  min-height: 200px;
-  padding-top: 70px;
+/*loading*/
+/*--------------------------------*/
+.cg-busy-backdrop {
+	background-color:#FAFAFA;
+	opacity:1;
 }
+/*--------------------------------*/
 
+/*Profile styling*/
+/*--------------------------------*/
 .profile{
 	background-color: #F1F6E3;
 	padding: 2%;
 	border: 1px solid #B8D370;
-}
-
-.btn-default{
-	background-color: #F1F6E3;
-	border: 1px solid #B8D370;
-	color: #5B6937;
 }
 
 .rateNav{
@@ -177,24 +258,27 @@ body {
 	z-index: 5;
 }
 
+/*Profile Images*/
+/*-----------------*/
 .imgNav {
     display: block;
     height: 48px;
     left: 0;
     margin: 0 auto;
     padding: 1em 0 0.8em;
-    position: absolute;
+    position: absolute;;
     right: 0;
-    text-align: center;
     width: 100%;
     z-index: 5;
 }
 .imgNav li {
     cursor: pointer;
-    display: inline-block;
+    display: block;
     height: 50px;
-		border: 1px solid #DCE0D0;
-    position: relative;
+		border: 1px solid #2A0561;
+    position: relative;;
+		top: 50%;
+		transform: translateY(-50%);
     width: 70px;
 		-moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
 	 	-webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
@@ -206,7 +290,7 @@ body {
 }
 
 .imgNav li.active {
-	border: 1px solid #F1F6E3;
+	border: 1px solid #640CE8;
 }
 
 .imgNav li.active img{
@@ -218,11 +302,49 @@ body {
     width: 100%;
 }
 
-.cg-busy-backdrop {
-	background-color:#FAFAFA;
-	opacity:1;
-}
+.imgSlider {
+    border: 15px solid #0CC6E8;
+    border-radius: 2px;
+		background-color: #0CC6E8;
+    height: 800px;
+		width: 1000px;
+		overflow: hidden;
+    margin: 5px auto;
+		margin-top: 15px;
+    position: relative;
+		box-shadow: 2px 3px 4px #888888;
+		-moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+	 	-webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+	 	box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
 
+}
+.imgSlide {
+		position: absolute;
+		margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+		max-width: 100%;
+		max-height: 100%;
+		border: 1px solid #2A0561;
+}
+.imgSlide.ng-hide-add {
+    opacity:1;
+}
+.imgSlide.ng-hide-add.ng-hide-add-active {
+    opacity:0;
+}
+.imgSlide.ng-hide-remove {
+    display:block!important;
+    opacity:0;
+}
+.imgSlide, .imgSlide.ng-hide-remove.ng-hide-remove-active {
+    opacity:1;
+}
+/*-----------------*/
+/*Profile Overlay */
+/*-----------------*/
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
   position:absolute;;
@@ -265,7 +387,10 @@ body {
   font-weight: bold;
   font-family: 'arial', 'sans-serif';
 }
+/*-----------------*/
 
+/*Fav Button*/
+/*-----------------*/
 .fav-button{
 	background-image: url('../img/Heart.png');
 	background-size: 100%;
@@ -298,44 +423,6 @@ body {
 	-ms-transition: width 1s, height 1s, margin 1s;
 	transition: width 1s, height 1s, margin 1s;
 
-}
-
-.arrow {
-    cursor: pointer;
-    display: block;
-    height: 64px;
-    margin-top: -35px;
-    outline: medium none;
-    position: absolute;
-    top: 50%;
-    width: 64px;
-    z-index: 5;
-		-webkit-transition: width 1s, height 1s, margin 1s;
-		-moz-transition: width 1s, height 1s, margin 1s;
-		-ms-transition: width 1s, height 1s, margin 1s;
-		transition: width 1s, height 1s, margin 1s;
-}
-
-.arrow.next-button{
-	background-image: url('../img/nextButton.png');
-	background-size: 100%;
-	width: 80px;
-	height: 80px;
-	opacity: 0.1;
-	right: 20px;
-	background-position: center;
-  background-repeat: no-repeat;
-}
-
-.arrow.pre-button{
-	background-image: url('../img/preButton.png');
-	background-size: 100%;
-	width: 80px;
-	height: 80px;
-	left: 20px;
-  opacity: 0.1;
-	background-position: center;
-  background-repeat: no-repeat;
 }
 
 .fav-btn{
@@ -388,77 +475,19 @@ body {
 	height: 64px;
 	width: 64px;
 }
-
-.arrow.pre-button:hover{
-	background-image: url('../img/preButton-white.png');
-	opacity:1;
-	height: 100px;
-	width: 100px;
-	color: white;
-}
-.arrow.next-button:hover{
-	background-image: url('../img/nextButton-white.png');
-  opacity:1;
-	height: 100px;
-	width: 100px;
-	color: white;
+/*-----------------*/
+/*Custom Slider styling*/
+/*-----------------*/
+.rzslider .rz-pointer {
+	background-color: #2A0561;
 }
 
-.arrow.pre-button:active{
-	background-image: url('../img/preButton-white.png');
-	opacity:1;
-	height: 70px;
-	width: 70px;
-	color: white;
+.rzslider .rz-bubble {
+	color: #FFF;
+	text-shadow: 1px 1px 2px #000000;
 }
-.arrow.next-button:active{
-	background-image: url('../img/nextButton-white.png');
-  opacity:1;
-	height: 70px;
-	width: 70px;
-	color: white;
-}
-
-.imgSlider {
-    border: 15px solid #F4F2F7;
-    border-radius: 2px;
-		background-color: #F4F2F7;
-    height: 800px;
-		width: 1000px;
-		overflow: hidden;
-    margin: 5px auto;
-		margin-top: 15px;
-    position: relative;
-		box-shadow: 2px 3px 4px #888888;
-		-moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
-	 	-webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-	 	box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-
-}
-.imgSlide {
-		position: absolute;
-		margin: auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-		max-width: 100%;
-		max-height: 100%;
-		border: 1px solid #E7D4F8;
-}
-.imgSlide.ng-hide-add {
-    opacity:1;
-}
-.imgSlide.ng-hide-add.ng-hide-add-active {
-    opacity:0;
-}
-.imgSlide.ng-hide-remove {
-    display:block!important;
-    opacity:0;
-}
-.imgSlide, .imgSlide.ng-hide-remove.ng-hide-remove-active {
-    opacity:1;
-}
+/*-----------------*/
+/*--------------------------------*/
 
 @media (max-width: 1075px) {
     .imgSlider {

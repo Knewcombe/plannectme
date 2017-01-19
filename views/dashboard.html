@@ -1,7 +1,7 @@
 <div class="content row" ng-init="getProfiles()">
 	<div cg-busy="profiePromise">
 		<div class="container">
-			<div id="navbar" class="navbar navbar-default navbar-collapse collapse">
+			<div id="navbar" class="navbar navbar-white navbar-collapse collapse">
 				<form class="navbar-form" name="search_form" ng-submit="submitSearch()">
 					<div class="form-group navbar-left col-xs-12 col-sm-12 col-md-12">
 						<div class="col-xs-2">
@@ -28,6 +28,7 @@
 				</form>
 			</div><!--/.nav-collapse -->
 		</div>
-		<div profile_view></div>
+		<profile_view></profile_view>
 	</div>
+	<!-- <ad_bar></ad_bar> -->
 </div>

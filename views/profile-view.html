@@ -2,15 +2,15 @@
 	<div class="row col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
 		<h5 class="col-xs-7">{{countryName}}  {{countryEmoji}}</h5>
 	</div>
-		<div class="container imgSlider" ng-swipe-right="showPrev()" ng-swipe-left="showNext()">
+		<div class="container imgSlider" ng-swipe-right="previousProfile()" ng-swipe-left="nextProfile()" ng-swipe-up="showNext()" ng-swipe-down="showPrev()">
 			<!-- <span ng-click="previousProfile()" class="btn btn-special pre-button"></span> -->
 		<!-- enumerate all photos -->
 			<img ng-if="images.length != 0" ng-repeat="image in images track by $index" ng-hide="!isCurrentSlideIndex($index)" class="imgSlide slide-animation" ng-src="{{image}}" />
 			<img ng-if="images.length == 0"  class="imgSlide" style="width:80%;" ng-src="./img/defaultImage/defaultImage.gif"/>
 			<!-- extra navigation controls -->
 			<!-- <span type="button" value="" ng-click="nextProfile()" class="btn btn-special next-button"></span> -->
-			<a ng-click="previousProfile()" class="btn arrow pre-button"></a>
-			<a ng-click="nextProfile()" class="btn arrow next-button"></a>
+			<!-- <a ng-click="previousProfile()" class="btn arrow pre-button"></a>
+			<a ng-click="nextProfile()" class="btn arrow next-button"></a> -->
 			<div ng-switch on="profileFav">
 				<a ng-switch-default ng-click="favouriteProfile()" class="btn fav-btn fav-button"></a>
 				<a ng-switch-when="true" ng-click="removeFavourite()" class="btn fav-btn fav-active"></a>

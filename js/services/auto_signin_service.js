@@ -5,8 +5,6 @@ angular.module("app").service('AutoSignInService', ['$localStorage', '$sessionSt
 		var user = {email, password};
 		var promise = UserControlService.authUser(user);
 		promise.then(function(data){
-			console.log("Test");
-			console.log(data);
 			deferred.resolve(data);
 		})
 		return deferred.promise;
