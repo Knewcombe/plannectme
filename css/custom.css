@@ -114,6 +114,11 @@ a {
 /*--------------------------------*/
 /*Custom Navbar styling*/
 /*--------------------------------*/
+
+.navbar-toggle .icon-bar {
+	background-color: #FFF;
+}
+
 .navbar-custom {
   background-color: #0CC6E8;
   border-color: #0994AD;
@@ -508,6 +513,12 @@ a {
     }
 }
 
+@media (min-width: 768px){
+	.navbar-form .form-control {
+    width: 100%;
+	}
+}
+
 @media (max-width: 900px) {
     .imgSlider {
         height: 650px;
@@ -530,7 +541,7 @@ a {
 @media (max-width: 750px) {
     .imgSlider {
         height: 600px;
-        width: 700px;
+        width: 600px;
     }
     .imgSlider .imgSlide {
 				height: 100%;
@@ -550,7 +561,7 @@ a {
 @media (max-width: 650px) {
     .imgSlider {
         height: 550px;
-        width: 650px;
+        width: 550px;
     }
     .imgSlider .imgSlide {
 				height: 100%;
@@ -571,7 +582,27 @@ a {
 @media (max-width: 550px) {
     .imgSlider {
         height: 500px;
-        width: 600px;
+        width: 450px;
+    }
+    .imgSlider .imgSlide {
+				height: 100%;
+    }
+		.imgSlide{
+			border: 2px solid #F4F2F7;
+		}
+    .imgNav {
+        height: 28px;
+    }
+    .imgNav li {
+        height: 26px;
+        width: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .imgSlider {
+        height: 350px;
+        width: 350px;
     }
     .imgSlider .imgSlide {
 				height: 100%;

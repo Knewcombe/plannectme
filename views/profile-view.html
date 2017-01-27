@@ -1,12 +1,14 @@
 <div ng-controller="ProfileViewController">
-	<div class="row col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+	<div class="row col-md-offset-1">
 		<h5 class="col-xs-7">{{countryName}}  {{countryEmoji}}</h5>
 	</div>
-		<div class="container imgSlider" ng-swipe-right="previousProfile()" ng-swipe-left="nextProfile()" ng-swipe-up="showNext()" ng-swipe-down="showPrev()">
+		<div class="row container imgSlider" ng-swipe-right="previousProfile()" ng-swipe-left="nextProfile()">
 			<!-- <span ng-click="previousProfile()" class="btn btn-special pre-button"></span> -->
 		<!-- enumerate all photos -->
+		<div ng-swipe-up="showNext()" ng-swipe-down="showPrev()">
 			<img ng-if="images.length != 0" ng-repeat="image in images track by $index" ng-hide="!isCurrentSlideIndex($index)" class="imgSlide slide-animation" ng-src="{{image}}" />
 			<img ng-if="images.length == 0"  class="imgSlide" style="width:80%;" ng-src="./img/defaultImage/defaultImage.gif"/>
+		</div>
 			<!-- extra navigation controls -->
 			<!-- <span type="button" value="" ng-click="nextProfile()" class="btn btn-special next-button"></span> -->
 			<!-- <a ng-click="previousProfile()" class="btn arrow pre-button"></a>

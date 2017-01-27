@@ -5,7 +5,7 @@
  * Description: Allows for connection with server.
  */
 angular.module("app").constant('API_CONN', {
-	NODE_SERVER: "http://localhost:8080"
+	NODE_SERVER: "https://plannectme.com"
 })
 //https://plannectme.com
 // http://localhost:8080

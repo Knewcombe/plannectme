@@ -5,13 +5,13 @@
 		</div>
 		<form class="form-group form-horizontal col-md-offset-2 col-sm-offset-2 col-xs-offset-2" name"profile_form" ng_submit="submit()">
 			<div class="row padding-top padding-bottom">
-				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+				<div class="col-xs-10 col-sm-8 col-md-6 col-lg-5">
 					<!--Profile Name-->
 					<label>Email</label>
-			  	<input type="text" name="eamil" class="form-control" ng-model="userFormData.email" required>
+			  	<input type="email" name="eamil" class="form-control" ng-model="userFormData.email" required>
 			  	<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Please enter an email.</p>
 				</div>
-					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+					<div class="col-xs-10 col-sm-8 col-md-6 col-lg-5">
 						<!--Profile Password-->
 						<label>Password</label>
 				  	<input type="password" name="lastName" class="form-control" ng-model="userFormData.password" required>

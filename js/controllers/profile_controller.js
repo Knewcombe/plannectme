@@ -1,4 +1,4 @@
-angular.module("app").controller('CreateProfile', function($scope, $location, $rootScope, $localStorage, $sessionStorage, UserControlService, AutoSignInService, ProfileServices){
+angular.module("app").controller('CreateProfile', function($scope, $location, $rootScope, $localStorage, $sessionStorage, UserControlService, AutoSignInService, ProfileServices, DOBService){
 
 	$scope.test = [];
 	$scope.contry_data = [];
@@ -12,8 +12,20 @@ angular.module("app").controller('CreateProfile', function($scope, $location, $r
 
 	$rootScope.url = $location.path();
 
-
 	$scope.images = [];
+
+
+	$scope.calcDays = DOBService.getDays();
+	$scope.calcMonths = DOBService.getMonths();
+	$scope.calcYears = DOBService.getYears();
+	$scope.selectedDay = 0; $scope.selectedMonth = 0;
+
+	  /*Hack to remove default '?' in select dropdowns*/
+	  $scope.dob = {dayDefault: {name: "Day", value: "0"},
+	                monthDefault: {name: "Month", value: "0"},
+	                yearDefault: {name: "Year", value: "0"},
+			collection:{},
+	                };
 
 	$scope.profileFormData = {
 		'firstName': '',
@@ -31,23 +43,55 @@ angular.module("app").controller('CreateProfile', function($scope, $location, $r
 		}
 	}
 
-	$scope.dateChange = function(){
-	  var today = new Date();
-	  var birthDate = new Date($scope.profileFormData.dob);
+  $scope.$watch('dob.dayDefault', function (obj) {
+    if(obj){
+      $scope.selectedDay = obj.name;
+      $scope.dob.monthDefault = {name: "Month", value: "0"};
+      $scope.dob.yearDefault = {name: "Year", value: "0"};
+      DOBService.changeDay(obj.name, function(err, result) {
+         $scope.calcMonths = DOBService.getMonths(result);
+      });
+    }
+  });
+
+  $scope.$watch('dob.monthDefault', function (obj) {
+    if(obj){
+      $scope.dob.yearDefault = {name: "Year", value: "0"};
+      $scope.selectedMonth = obj.name;
+      DOBService.changeMonth({"day":$scope.selectedDay, "month":obj.value}, function(err, result) {
+         $scope.calcYears = DOBService.getYears(result);
+      });
+    }
+  });
+
+  $scope.$watchCollection('[dob.dayDefault, dob.monthDefault, dob.yearDefault]', function(newValues, oldValues){
+    $scope.dob.collection = newValues[2].value +'-'+newValues[1].value+"-"+newValues[0].value;
+    console.log($scope.dob.collection);
+		var today = new Date();
+	  var birthDate = new Date($scope.dob.collection);
 	  var age = today.getFullYear() - birthDate.getFullYear();
 	  var m = today.getMonth() - birthDate.getMonth();
 	  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())){
 			age--;
 		}
 		if(age){
+			$scope.profileFormData.dob = $scope.dob.collection;
+			console.log($scope.profileFormData)
 			if(age > 18){
+				console.log("Older then 18")
 				$scope.profileFormData.options.rating = 1;
 				$scope.profileFormData.options.visiableRate = 1;
+				$scope.ratingAge = false;
 			}else{
+				console.log("Younger then 18")
 				$scope.ratingAge = true;
 			}
 		}
-	}
+  });
+
+	// $scope.dateChange = function(){
+	//
+	// }
 
 	$scope.nextStep = function(){
 		if($scope.step == 0){

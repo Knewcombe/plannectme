@@ -1,10 +1,10 @@
 <div class="content row" ng-init="getProfiles()">
 	<div cg-busy="profiePromise">
 		<div class="container">
-			<div id="navbar" class="navbar navbar-white navbar-collapse collapse">
+			<div id="navbar" class="navbar navbar-white">
 				<form class="navbar-form" name="search_form" ng-submit="submitSearch()">
 					<div class="form-group navbar-left col-xs-12 col-sm-12 col-md-12">
-						<div class="col-xs-2">
+						<div class="col-xs-4 col-md-2 col-lg-1">
 							<label>Gender: </label>
 							<select name="gender" class="form-control selectInput" ng-model="searchOptions.gender">
 								<option value="">All</option>
@@ -12,16 +12,16 @@
 								<option value="F">Female</option>
 							</select>
 						</div>
-						<div class="col-xs-3">
+						<div class="col-xs-3 col-md-4 col-lg-5">
 							<label>Age: </label>
 							<input type="text" id="amount" class="ui-age-text" readonly>
 							<div id="age-slider"></div>
 						</div>
-						<div class="col-xs-5">
+						<div class="col-xs-4 col-md-5 col-lg-5">
 							<label>Country: </label>
 							<country-select name="country" class="form-control selectInput" ng-model="searchOptions.country" cs-priorities="CA, GB, US"></country-select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-3 col-md-1 col-lg-1">
 							<input type="submit" value="Search" class="btn btn-default"/>
 						</div>
 					</div>

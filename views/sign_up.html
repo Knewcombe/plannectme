@@ -19,13 +19,13 @@
 						<div ng-show="step == 0">
 							<label>Profile Information</label>
 									<div class="row padding-top padding-bottom">
-										<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+										<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
 											<!--Profile Name-->
 											<label>First Name</label>
 									  	<input type="text" name="firstName" class="form-control" ng-model="profileFormData.firstName" required>
 									  	<p ng-show="profile_form.firstName.$invalid && !profile_form.firstName.$pristine" class="help-block">First name is required.</p>
 										</div>
-										<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+										<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
 											<!--Profile Password-->
 											<label>Last Name</label>
 									  	<input type="text" name="lastName" class="form-control" ng-model="profileFormData.lastName" required>
@@ -33,13 +33,13 @@
 										</div>
 										</div>
 										<div class="row padding-bottom padding-top">
-											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+											<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
 												<!--Profile Password-->
 												<label>Password</label>
 										  	<input type="password" name="password" class="form-control" ng-model="profileFormData.password" required>
 										  	<p ng-show="profile_form.password.$invalid && !profile_form.password.$pristine" class="help-block">Password is required.</p>
 											</div>
-											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+											<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
 												<!--Profile Password-->
 												<label>Confirm Password</label>
 									  		<input type="password" name="confirm_password" class="form-control" ng-model="profileFormData.confirm_password" required>
@@ -47,7 +47,7 @@
 											</div>
 										</div>
 										<div class="row padding-bottom padding-top">
-											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+											<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
 												<!--Profile Password-->
 												<label>Email</label>
 								  			<input type="email" name="email" class="form-control" ng-model="profileFormData.email" placeholder="email@email.com" required>
@@ -56,17 +56,29 @@
 										</div>
 											<!--Profile Password-->
 										<div class="row padding-bottom padding-top">
-											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 												<label>Date of Birth</label>
-												<datepicker date-format="yyyy-MM-dd">
-												  <input date-time ng-change="dateChange()" ng-model="profileFormData.dob" type="text" placeholder="YYYY-MM-DD" class="form-control" ng-disabled="ageChange" required/>
-												</datepicker>
+												<div class="row control">
+							            <input name="dob" type="hidden" ng-model="dob.collection" ng-pattern="pattern.date" required>
+							            <div class="col-xs-10 col-sm-3 col-md-3 col-lg-3">
+							                <select ng-model="dob.dayDefault" ng-options="d as d.name for d in calcDays track by d.value" class="form-control" ng-disabled="ageChange">
+							                </select>
+							            </div>
+							            <div class="col-xs-10 col-sm-3 col-md-3 col-lg-3">
+							                <select ng-model="dob.monthDefault" ng-options="m as m.name for m in calcMonths track by m.value" class="form-control" ng-disabled="ageChange">
+							                </select>
+							            </div>
+							            <div class="col-xs-10 col-sm-3 col-md-3 col-lg-3">
+							                <select ng-model="dob.yearDefault" ng-options="y as y.name for y in calcYears track by y.value" class="form-control" ng-disabled="ageChange">
+							                </select>
+							            </div>
 									  		<!-- <input type="date" name="dob" class="form-control" ng-model="profileFormData.dob" required> -->
 									  		<p ng-show="profile_form.dob.$invalid && !profile_form.dob.$pristine" class="help-block">Please enter a vaild date of birth.</p>
 											</div>
 										</div>
+										</div>
 										<div class="row padding-bottom padding-top">
-											<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+											<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
 												<label>Gender</label>
 										  	<select name="gender" class="form-control selectInput" ng-model="profileFormData.gender" required>
 													<option disabled="disabled" value="">- please select -</option>
@@ -78,7 +90,7 @@
 										</div>
 										<!--Country Password-->
 										<div class="row padding-bottom padding-top">
-											<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+											<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
 												<label>Country</label>
 												<country-select name="country" class="form-control selectInput" ng-model="profileFormData.country" cs-priorities="CA, GB, US" required></country-select>
 												<p ng-show="profile_form.country.$invalid && !profile_form.country.$pristine" class="help-block">Please enter your country.</p>
