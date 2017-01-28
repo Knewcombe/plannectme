@@ -158,6 +158,10 @@ angular.module("app").controller('SignIn', function($scope, $location, $rootScop
 		'password': ''
 	}
 
+	$scope.forgotPassword = function(){
+		$location.path('/forgot_password');
+	}
+
 	$scope.signup = function(){
 		$location.path('/signup');
 	}

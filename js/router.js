@@ -141,6 +141,21 @@ angular.module("app").config(function($routeProvider, $locationProvider){
 			}
 	});
 
+	$routeProvider.when('/forgot_password',{
+		templateUrl: 'views/forgotpassword.html',
+		controller: 'ForgotPassword',
+	});
+
+	$routeProvider.when('/answer',{
+		templateUrl: 'views/answerQuestions.html',
+		controller: 'answerQuestions',
+	});
+
+	$routeProvider.when('/new_password',{
+		templateUrl: 'views/newPassword.html',
+		controller: 'newPassword',
+	});
+
 	$routeProvider.when('/not_found', {
         templateUrl: 'views/error.html'
     });

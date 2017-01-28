@@ -102,4 +102,34 @@ angular.module("app").service('UserControlService', ['$localStorage', '$sessionS
 			})
 			return deferred.promise;
 	}
+
+	this.getQuestions = function(userEmail){
+		var deferred = $q.defer();
+		var request = {
+			'email': userEmail
+		}
+		$http.post(API_CONN.NODE_SERVER+'/auth/questions_get', request)
+			.success(function(data){
+				deferred.resolve(data);
+			})
+			.error(function(data){
+				$location.path("/error");
+			})
+			return deferred.promise;
+	}
+
+	this.sendAnswers = function(questions){
+		var deferred = $q.defer();
+		var request = {
+				'questions': questions
+		}
+		$http.post(API_CONN.NODE_SERVER+'/auth/answer_questions', request)
+			.success(function(data){
+				deferred.resolve(data);
+			})
+			.error(function(data){
+				$location.path("/error");
+			})
+			return deferred.promise;
+	}
 }]);

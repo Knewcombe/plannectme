@@ -1,0 +1,22 @@
+<div class="content row container-fluid" ng-init="step = 0">
+	<div class="well col-xs-10 col-sm-10 col-md-10">
+        <div class="page-header text-center">
+          <div class="alert alert-danger" ng-show="answerAlert">
+  						<p><strong>Error: </strong>{{passwordError}}</p>
+  				</div>
+          <form id="user-form" class="form-group form-horizontal col-md-offset-2 col-sm-offset-2 col-xs-offset-2" name"profile_form" ng_submit="getQuestions()">
+            <!-- our nested state views will be injected here -->
+							<label>Please enter the email for the account of the forgotten password.</label>
+									<div class="row padding-top padding-bottom" ng-repeat="question in questions">
+										<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
+											<!--Profile Name-->
+											<label>{{question.question}}</label>
+									  	<input type="text" name="answer" class="form-control" ng-model="questions[$index].answer" required>
+									  	<p ng-show="profile_form.firstName.$invalid && !profile_form.firstName.$pristine" class="help-block">First name is required.</p>
+										</div>
+                    <input type="submit" value="Next" class="btn btn-default"/>
+                  </div>
+              </form>
+        </div>
+    </div>
+</div>
